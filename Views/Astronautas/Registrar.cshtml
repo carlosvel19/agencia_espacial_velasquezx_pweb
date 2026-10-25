@@ -1,0 +1,54 @@
+@model AgenciaEspacialVelasquezX.Models.Astronauta
+
+@{
+    ViewData["Title"] = "Registrar Astronauta";
+}
+
+<div class="container mt-4">
+    <h1 class="text-info">📝 Registro de Astronauta</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Registrar" method="post" class="card bg-dark text-light border-info p-4">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label asp-for="Nombre" class="form-label"></label>
+                    <input asp-for="Nombre" class="form-control" placeholder="Ej: Juan Pérez" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Correo" class="form-label"></label>
+                    <input asp-for="Correo" class="form-control" placeholder="ejemplo@correo.com" />
+                    <span asp-validation-for="Correo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Edad" class="form-label"></label>
+                    <input asp-for="Edad" class="form-control" placeholder="18 - 65" />
+                    <span asp-validation-for="Edad" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Especialidad" class="form-label"></label>
+                    <select asp-for="Especialidad" class="form-select">
+                        <option value="">Selecciona una opción...</option>
+                        <option value="Ingeniería Aeroespacial">Ingeniería Aeroespacial</option>
+                        <option value="Medicina Espacial">Medicina Espacial</option>
+                        <option value="Robótica y Automatización">Robótica y Automatización</option>
+                        <option value="Astrofísica">Astrofísica</option>
+                    </select>
+                    <span asp-validation-for="Especialidad" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-info w-100">🚀 Registrar astronauta</button>
+                <a asp-action="Index" class="btn btn-outline-secondary w-100 mt-2">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

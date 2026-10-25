@@ -1,0 +1,48 @@
+@model List<AgenciaEspacialVelasquezX.Models.Astronauta>
+
+@{
+    ViewData["Title"] = "Astronautas";
+}
+
+<div class="container mt-4">
+    <h1 class="text-info">🚀 Astronautas de VelasquezX</h1>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Mensaje"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <p class="lead">Total registrados: <span class="badge bg-info text-dark">@Model.Count</span></p>
+    <a asp-action="Registrar" class="btn btn-info mb-3">➕ Registrar nuevo astronauta</a>
+
+    @if (Model.Count == 0)
+    {
+        <p class="text-muted fst-italic">Aún no hay astronautas registrados.</p>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var astronauta in Model)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card bg-dark text-light border-info h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-info">@astronauta.Nombre</h5>
+                            <p class="card-text"><strong>Correo:</strong> @astronauta.Correo</p>
+                            <p class="card-text"><strong>Edad:</strong> @astronauta.Edad años</p>
+                            <p class="card-text"><strong>Especialidad:</strong> @astronauta.Especialidad</p>
+                            <p class="card-text"><small class="text-muted">Registrado: @astronauta.FechaRegistro.ToString("dd/MM/yyyy")</small></p>
+                            <form asp-action="Eliminar" asp-route-id="@astronauta.Id" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Eliminar este astronauta?')">🗑️ Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
