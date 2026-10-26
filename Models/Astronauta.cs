@@ -15,7 +15,7 @@ public class Astronauta
     public string Correo { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "La edad es obligatoria")]
-    [Range(18, 65, ErrorMessage = "La edad debe esXDtar entre 18 y 65 años")]
+    [Range(18, 65, ErrorMessage = "La edad debe estar entre 18 y 65 años")]
     public int Edad { get; set; }
 
     [Required(ErrorMessage = "Seleccione una especialidad")]
